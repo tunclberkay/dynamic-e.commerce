@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .containerr {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 sütun olacak */
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            color: gray;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .product-card .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e67e22;
+        }
+
+        .product-card button {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .product-card button:hover {
+            background-color: #e67e22;
+        }
+
+          /* Modal için stil */
+          .modal {
+            display: none; /* Başlangıçta gizli */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 5px;
+            object-fit: cover; /* Resmin orantılı kesilmesini sağlar */
+        }
+
+        .cart-item h4 {
+            margin: 0;
+            flex: 1;
+        }
+
+        .cart-item .price {
+            font-weight: bold;
+        }
+
+        .cart-item .remove {
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            margin: 20px;
+            background-color: #e67e22;
+            border-radius: 50px;
+        }
+
+        .cart-item .remove:hover {
+            text-decoration: underline;
+        }
+
+        .total-price {
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .button2{
+            position: fixed;
+            bottom: 20px;  /* Sayfanın altına 20px uzaklık */
+           right: 20px;   /* Sayfanın sağ tarafına 20px uzaklık */
+           background-color: #e67e22;
+           color: white;
+            border: none;
+           padding: 12px;
+            border-radius: 30%;
+         cursor: pointer;
+         font-size: 64px;  /* İkon büyüklüğü */
+         z-index: 1000;    /* Diğer öğelerin üstünde görünmesi için */
+         display: flex;
+         justify-content: center;
+         align-items: center;
+        }
+        /* Mobil uyumluluk (Ekran küçükse 2 veya 1 sütun) */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        /* Kategori Butonları İçin Stil */
+.category-buttons {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.category-buttons button {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.category-buttons button:hover {
+    background-color: #ff9800;
+    transform: scale(1.05);
+}
+
+.category-buttons button.active {
+    background-color: #ff9800;
+    font-weight: bold;
+}
+    </style>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+    <!-- Font Awesome CDN ekleme -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">GEAR</a>
+            
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html" class="btn-login">Login</a></li>
+            </ul>
+    
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+
+    
+    <div>
+        <!-- just to make scrolling effect possible -->
+       
+
+        <div style="margin-top: 80px;" class="slider-container">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/900/400?random=1" alt="Slide 1">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/900/400?random=2" alt="Slide 2">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/900/400?random=3" alt="Slide 3">
+                    </div>
+                </div>
+                <!-- Navigasyon Butonları -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Sayfa Noktaları -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+			
+      
+			
+            <h2 class="myH2" style="padding-top: 50px;" >Ürünlerimiz</h2>
+
+            
+            <div class="category-buttons" style="text-align: center; margin-bottom: 20px;">
+                <button onclick="filterProducts('all')">Tümü</button>
+                <button onclick="filterProducts('kolye')">Kolye</button>
+                <button onclick="filterProducts('kupe')">Küpe</button>
+                <button onclick="filterProducts('bilezik')">Bilezik</button>
+            </div>
+           
+            
+
+                  
+                   <!-- Arama Çubuğu -->
+                    <div class="search-container">
+                        <div style="text-align: center; margin: 20px;">
+                            <i class="fas fa-search"></i>
+                          <input type="text" id="searchBar" placeholder="Ürün ara..." onkeyup="searchProducts()" 
+                          style="padding: 10px; width: 50%; font-size: 16px; border: 1px solid #ddd; border-radius: 5px;">
+                          </div>
+
+                    </div>
+                 
+            
+            
+            <div class="containerr">
+               
+            </div>
+
+          <!-- Sepet Modalı -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h1 style="margin-bottom: 10px;">Sepetiniz</h1>
+            <div id="cart-items"></div>
+            <div class="total-price" id="total-price">Toplam: ₺0.00</div>
+            <button id="checkout-btn" class="checkout-btn">Şimdi Öde</button>
+        </div>
+    </div>
+
+    <button class="button2" onclick="openModal()"> <i class="fas fa-shopping-cart"></i>  <!-- Sepet İkonu -->
+        <span id="cart-badge" class="cart-badge">0</span> <!-- Sepet sayısı (badge) -->
+    </button>
+			
+
+          <!-- Footer -->
+    <footer style="margin-top: 50px;">
+        <div class="social-icons">
+            <a href="#" title="Facebook"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" width="24"></a>
+            <a href="#" title="Instagram"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram" width="24"></a>
+        </div>
+        <p>&copy; 2025 Şirket Adı - Tüm Haklar Saklıdır.</p>
+        <p>İletişim: info@sirket.com</p>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+        });
+    </script>
+
+
+    <!-- Jquery needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <!-- Function used to shrink nav bar removing paddings and adding black background -->
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+    </script>
+
+</body>
+</html>

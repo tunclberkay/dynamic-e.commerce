@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+
+    <link rel="stylesheet" href="./css/style2.css"> <!-- Mevcut CSS dosyanıza bağlantı -->
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">GEAR</a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="about.html" >About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html" class="btn-login">Çıkış Yap</a></li>
+            </ul>
+    
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="about-section">
+        <h1>Ürün Ekle</h1>
+        <form id="product-form" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Ürün Adı" required>
+            <textarea name="description" placeholder="Açıklama" required></textarea>
+            <input type="number" name="price" placeholder="Fiyat" required>
+            <input type="text" name="category" placeholder="Kategori" required>
+            <input type="file" name="image" accept="image/png, image/jpeg" required>
+            <button type="submit">Ürün Yükle</button>
+        </form>
+
+
+
+    </section>
+
+    <section class="about-section">
+        <h1>Toplam Ürün</h1>
+        <span id="product-count">0</span>
+    </section>
+
+
+       <!-- Footer -->
+       <footer style="margin-top: 50px;">
+        <div class="social-icons">
+            <a href="#" title="Facebook"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" width="24"></a>
+            <a href="#" title="Instagram"><img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram" width="24"></a>
+        </div>
+        <p>&copy; 2025 Şirket Adı - Tüm Haklar Saklıdır.</p>
+        <p>İletişim: info@sirket.com</p>
+    </footer>
+    
+    <script>
+    document.getElementById('product-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+    
+        const formData = new FormData(this);
+    
+        try {
+            const response = await fetch('/add-product', {
+                method: 'POST',
+                body: formData
+            });
+    
+            const result = await response.json();
+            if (response.ok) {
+                alert(result.message);  // Başarı mesajı
+            } else {
+                alert(result.error);  // Hata mesajı
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Bir hata oluştu!');
+        }
+    });
+
+    async function fetchProducts() {
+    try {
+        const response = await fetch('/products'); // API doğru mu?
+        if (!response.ok) {
+            throw new Error("API hatası: " + response.status);
+        }
+
+        const products = await response.json();
+        console.log("Çekilen Ürünler:", products); // Konsolda kontrol için
+
+        // Ürün sayısını güncelle
+        document.getElementById("product-count").textContent = `Toplam Ürün: ${products.length}`;
+
+    } catch (error) {
+        console.error("Ürünler yüklenirken hata oluştu:", error);
+        document.getElementById("product-count").textContent = "Ürünler yüklenemedi.";
+    }
+}
+
+// Sayfa tamamen yüklendiğinde çalıştır
+window.onload = () => {
+    console.log("Sayfa yüklendi, ürünler çekiliyor...");
+    fetchProducts();
+};
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/yourkitcode.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">GEAR</a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Homepage</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html" class="btn-login">Login</a></li>
+            </ul>
+    
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div style="margin-top: 100px;" class="contact-container">
+        <h2>Bize Ulaşın</h2>
+
+        <div class="contact-content">
+            <!-- Sol: İletişim Bilgileri -->
+            <div class="contact-info">
+                <h3>İletişim Bilgileri</h3>
+                <p><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</p>
+                <p><i class="fas fa-phone"></i> +90 555 123 45 67</p>
+                <p><i class="fas fa-envelope"></i> info@ornek.com</p>
+                <p><i class="fas fa-clock"></i> Pazartesi - Cuma: 09:00 - 18:00</p>
+            </div>
+
+            <!-- Sağ: İletişim Formu -->
+            <div class="contact-form">
+                <h3>Mesaj Gönder</h3>
+                <form action="send_mail.php" method="POST">
+                    <input type="text" name="name" placeholder="Adınız" required>
+                    <input type="email" name="email" placeholder="E-posta" required>
+                    <textarea name="message" placeholder="Mesajınız" required></textarea>
+                    <button style="color: black;" type="submit">Gönder</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Harita -->
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+     
+
+    </div>
+ 
+ 
+</body>
+</html>

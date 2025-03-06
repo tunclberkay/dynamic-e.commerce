@@ -1,0 +1,857 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/*-- Inspiration taken from abdo steif -->
+/* --> https://codepen.io/abdosteif/pen/bRoyMb?editors=1100*/
+
+/* Genel Navbar Stili */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Şeffaf arka plan */
+    backdrop-filter: blur(10px); /* Arka plan bulanıklığı */
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* İçerik Container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* Logo Stili */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+/* Navbar */
+.navbar {
+    background: #222;
+    color: white;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    margin-left: auto; 
+    gap: 25px; /* Linkleri sağa taşı */
+}
+
+.navbar .nav-links li {
+    margin-left: 20px;
+}
+
+/* Hover Efekti */
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.navbar .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.navbar .nav-links a:hover {
+    color: #ffcc00;
+}
+
+
+/* Login Butonu */
+.btn-login {
+    background: #ffcc00;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: black !important;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn-login:hover {
+    background: darkorange;
+}
+
+/* Mobil Menü (Hamburger) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    background: white;
+    width: 30px;
+    height: 3px;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Responsive - Mobilde Menüyü Aç/Kapa */
+@media (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        background: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        display: none;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .nav-links li {
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    /* Menü Açıldığında Göster */
+    .nav-links.active {
+        display: flex;
+    }
+}
+/* Home section */
+.home {
+    width: 100%;
+    height: 10vh;
+    background-image:url('../img/home.jpg') ;
+    background-position: center top;
+	background-size:cover;
+}
+
+.navTrigger {
+    display: none;
+}
+
+.nav {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+
+/* Media qurey section */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .navTrigger {
+        display: block;
+    }
+    .nav div.logo {
+        margin-left: 15px;
+    }
+    .nav div.main_list {
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+    }
+    .nav div.show_list {
+        height: auto;
+        display: none;
+    }
+    .nav div.main_list ul {
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #111;
+        /*same background color of navbar*/
+        background-position: center top;
+    }
+    .nav div.main_list ul li {
+        width: 100%;
+        text-align: right;
+    }
+    .nav div.main_list ul li a {
+        text-align: center;
+        width: 100%;
+        font-size: 3rem;
+        padding: 20px;
+    }
+    .nav div.media_button {
+        display: block;
+    }
+}
+
+
+/* Animation */
+/* Inspiration taken from Dicson https://codemyui.com/simple-hamburger-menu-x-mark-animation/ */
+
+.navTrigger {
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    margin: auto;
+    position: absolute;
+    right: 30px;
+    top: 0;
+    bottom: 0;
+}
+
+.navTrigger i {
+    background-color: #fff;
+    border-radius: 2px;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+}
+
+.navTrigger i:nth-child(1) {
+    -webkit-animation: outT 0.8s backwards;
+    animation: outT 0.8s backwards;
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse;
+}
+
+.navTrigger i:nth-child(2) {
+    margin: 5px 0;
+    -webkit-animation: outM 0.8s backwards;
+    animation: outM 0.8s backwards;
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse;
+}
+
+.navTrigger i:nth-child(3) {
+    -webkit-animation: outBtm 0.8s backwards;
+    animation: outBtm 0.8s backwards;
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse;
+}
+
+.navTrigger.active i:nth-child(1) {
+    -webkit-animation: inT 0.8s forwards;
+    animation: inT 0.8s forwards;
+}
+
+.navTrigger.active i:nth-child(2) {
+    -webkit-animation: inM 0.8s forwards;
+    animation: inM 0.8s forwards;
+}
+
+.navTrigger.active i:nth-child(3) {
+    -webkit-animation: inBtm 0.8s forwards;
+    animation: inBtm 0.8s forwards;
+}
+
+@-webkit-keyframes inM {
+    50% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(45deg);
+    }
+}
+
+@keyframes inM {
+    50% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+@-webkit-keyframes outM {
+    50% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(45deg);
+    }
+}
+
+@keyframes outM {
+    50% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+@-webkit-keyframes inT {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        -webkit-transform: translateY(9px) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(9px) rotate(135deg);
+    }
+}
+
+@keyframes inT {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(9px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(9px) rotate(135deg);
+    }
+}
+
+@-webkit-keyframes outT {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        -webkit-transform: translateY(9px) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(9px) rotate(135deg);
+    }
+}
+
+@keyframes outT {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(9px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(9px) rotate(135deg);
+    }
+}
+
+@-webkit-keyframes inBtm {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        -webkit-transform: translateY(-9px) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(-9px) rotate(135deg);
+    }
+}
+
+@keyframes inBtm {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-9px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-9px) rotate(135deg);
+    }
+}
+
+@-webkit-keyframes outBtm {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        -webkit-transform: translateY(-9px) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(-9px) rotate(135deg);
+    }
+}
+
+@keyframes outBtm {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-9px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-9px) rotate(135deg);
+    }
+}
+
+.affix {
+    padding: 0;
+    background-color: #111;
+}
+
+
+.myH2 {
+	text-align:center;
+	font-size: 4rem;
+}
+.myP {
+	text-align: justify;
+	padding-left:15%;
+	padding-right:15%;
+	font-size: 20px;
+}
+@media all and (max-width:700px){
+	.myP {
+		padding:2%;
+	}
+}
+
+/* Footer */
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: auto; /* Sayfanın en altına sabitlenmesini sağlar */
+    width: 100vw;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.social-icons {
+    margin-bottom: 10px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+    display: inline-block;
+}
+
+
+/* Badge (rozet) stili */
+.cart-badge {
+    position: absolute;
+    top: -5px; /* İkonun üst kısmında */
+    right: -5px; /* İkonun sağ kısmında */
+    background-color: red;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 20px;  /* Badge içinde sayıyı ortalamak için */
+}
+
+/* Sepetteki her bir ürün için stil */
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px; /* Ürünler arasındaki boşluk */
+    font-size: 18px; /* Genel font boyutunu büyütme */
+}
+
+.cart-item span {
+    display: inline-block;
+    margin: 0 10px; /* 10px boşluk ekledik */
+    font-size: 16px;
+}
+
+
+/* Ürün adı stilini büyütme */
+.cart-item h4 {
+    font-size: 20px; /* Ürün adı font boyutunu büyütme */
+    margin: 0 10px; /* Ürün adı ve resim arasındaki boşluğu ayarlama */
+    font-weight: bold;
+}
+
+/* Ürün fiyatını büyütme */
+.cart-item .price {
+    font-size: 18px; /* Fiyatın font boyutunu büyütme */
+    font-weight: bold;
+    color: #e67e22; /* Fiyatın rengini değiştirme */
+}
+
+/* Sepet modalının alt kısmı */
+#cart-total {
+    display: flex;
+    flex-direction: column;  /* Yüksekliğe göre sıralama */
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #f4f4f4;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Toplam fiyat yazısının stilini ayarlayalım */
+#total-price {
+    color: #333;
+    margin-bottom: 15px;  /* Toplam fiyat ile buton arasındaki boşluk */
+}
+
+/* "Şimdi Öde" butonunun stilini ayarlayalım */
+.checkout-btn {
+    background-color: #e67e22;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%; /* Butonun genişliğini 100% yaparak alt kısmı doldurmasını sağlıyoruz */
+}
+
+.checkout-btn:hover {
+    background-color: #d35400; /* Hover durumunda renk değişimi */
+}
+
+.slider-container {
+    
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.mySwiper {
+    width: 100%;  /* Sayfanın tamamını kaplamaması için */
+    max-width: 900px;
+    border-radius: 15px; /* Köşeleri yuvarla */
+    overflow: hidden; /* Taşmaları engelle */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Hafif gölge efekti */
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Görselleri orantılı göster */
+    border-radius: 15px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #fff; /* Ok rengini beyaz yap */
+    background-color: rgba(0, 0, 0, 0.5); /* Hafif saydam arka plan */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+.swiper-pagination-bullet {
+    background: #ff6600 !important; /* Turuncu noktalar */
+    width: 12px;
+    height: 12px;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background: #ff3300 !important; /* Aktif nokta koyu turuncu */
+}
+
+    * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .containerr {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 sütun olacak */
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            color: gray;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .product-card .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #e67e22;
+        }
+
+        .product-card button {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .product-card button:hover {
+            background-color: #e67e22;
+        }
+
+          /* Modal için stil */
+          .modal {
+            display: none; /* Başlangıçta gizli */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 5px;
+            object-fit: cover; /* Resmin orantılı kesilmesini sağlar */
+        }
+
+        .cart-item h4 {
+            margin: 0;
+            flex: 1;
+        }
+
+        .cart-item .price {
+            font-weight: bold;
+        }
+
+        .cart-item .remove {
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            margin: 20px;
+            background-color: #e67e22;
+            border-radius: 50px;
+        }
+
+        .cart-item .remove:hover {
+            text-decoration: underline;
+        }
+
+        .total-price {
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .button2{
+            position: fixed;
+            bottom: 20px;  /* Sayfanın altına 20px uzaklık */
+           right: 20px;   /* Sayfanın sağ tarafına 20px uzaklık */
+           background-color: #e67e22;
+           color: white;
+            border: none;
+           padding: 12px;
+            border-radius: 30%;
+         cursor: pointer;
+         font-size: 64px;  /* İkon büyüklüğü */
+         z-index: 1000;    /* Diğer öğelerin üstünde görünmesi için */
+         display: flex;
+         justify-content: center;
+         align-items: center;
+        }
+        /* Mobil uyumluluk (Ekran küçükse 2 veya 1 sütun) */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 25px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 350px; /* Genişliği ayarlayabilirsin */
+            margin: 40px auto; /* Üstten ve alttan boşluk bırakır, ortalar */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-container i {
+            color: gray;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .search-container input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .contact-content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: #ff5722;
+        }
+        
+        .contact-form {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .contact-form button {
+            background: #ffcc00;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .contact-form button:hover {
+            background: #ffcc00;
+        }
+        
+        .map-container {
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        
+        
+        
+        
+
+        
